@@ -1,31 +1,31 @@
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 public class FerrisWheel {
-    public static void main(String[] args) {
-        try (Scanner scanner = new Scanner(System.in)) {
-            int n = scanner.nextInt();
-            int x = scanner.nextInt();
-            int[] weights = new int[n];
-            for (int i = 0; i < n; i++) {
-                weights[i] = scanner.nextInt();
-            }
-            Arrays.sort(weights);
-            int left = 0;
-            int right = n - 1;
-            int gondolas = 0;
-            while (left <= right) {
-                if (left == right) {
-                    gondolas++;
-                    break;
-                }
-                if (weights[left] + weights[right] <= x) {
-                    left++;
-                }
-                right--;
-                gondolas++;
-            }
-            System.out.println(gondolas);
-        }
-    }
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+
+		int n = sc.nextInt();
+		int x = sc.nextInt();
+		sc.nextLine();
+		String[] weightsStr = sc.nextLine().split(" ");
+		Integer[] weights = new Integer[n];
+		for (int i = 0; i < n; i++) { weights[i] = Integer.parseInt(weightsStr[i]); }
+		Arrays.sort(weights);
+
+		int ans = 0;
+		int i = 0;      
+		int j = n - 1;  
+		while (i <= j) {
+			ans++;
+			if (i == j) break;
+			if (weights[i] + weights[j] > x) {
+				j--;
+			}
+			else {
+				i++;
+				j--;
+			}
+		}
+		System.out.println(ans);
+	}
 }
